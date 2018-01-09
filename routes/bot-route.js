@@ -1,36 +1,36 @@
-var express = require('express')
-var route = express.Router()
-var io= require('socket.io')(route)
+// var express = require('express')
+// var route = express.Router()
+// var io= require('socket.io')(route)
 
-var movies = require("../functions/movies")
-var rq = require('request-promise')
-var actors = require("../functions/actors")
-var series = require("../functions/series")
-var apiai = require('apiai')
-var sessionId = Math.random() * 10000000
-var clientAccessToken ="e5fd4070d9e8491eb7bffe6a581e49dc"
-var developerAccessToken ="ddc9be9877f84670ab4b391a71fec8de"
-var app = apiai(clientAccessToken)
+// var movies = require("../functions/movies")
+// var rq = require('request-promise')
+// var actors = require("../functions/actors")
+// var series = require("../functions/series")
+// var apiai = require('apiai')
+// var sessionId = Math.random() * 10000000
+// var clientAccessToken =process.env.CLIENT_ACCESS_TOKEN
+// var developerAccessToken = process.env.DEVELOPER_ACCESS_TOKEN
+// var app = apiai(clientAccessToken)
 
-io.on('connection', function(client) {  
-  console.log('Client connected...');
-    var request
-    client.on('userMessage', data => {
-      console.log(data, "GOTTEN")
-      request = app.textRequest(data, { sessionId });
-    })
+// io.on('connection', function(client) {  
+//   console.log('Client connected...');
+//     var request
+//     client.on('userMessage', data => {
+//       console.log(data, "GOTTEN")
+//       request = app.textRequest(data, { sessionId });
+//     })
     
-    request.on('response', response => {
-      console.log(response, "RECIEVED")
-      client.emit('AIMessage', response)
-    });
+//     request.on('response', response => {
+//       console.log(response, "RECIEVED")
+//       client.emit('AIMessage', response)
+//     });
     
-    request.on('error', function(error) {
-      console.log("ERROR", error);
-    });
+//     request.on('error', function(error) {
+//       console.log("ERROR", error);
+//     });
     
-    request.end();
-})
+//     request.end();
+// })
 
 // route.post("/", (req, res) => {
 //   res.setHeader("Content-Type","application/json")
@@ -80,7 +80,7 @@ route.post("/", (req, res) => {
 
 function movieSearch(data) {
   const res = JSON.parse(data)
-  var cast = res.credits.cast.map(actor => `${actor.name} acted as ${actor.character}`)
+  var cast = res.credits.cast.filter((actor, i) => i < 5).map(actor => `${actor.name} acted as ${actor.character}`)
     .filter(detail => detail.indexOf("uncredited") === -1).join(", ")
     return {
       speech: `In ${res.title}, ${res.overview}. It was released on ${res.release_date}. In the movie ${cast}`,

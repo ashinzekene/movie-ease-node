@@ -1,11 +1,13 @@
-var fs = require('fs');
-var crawl = require('./crawl')
+const fs = require('fs');
+const crawl = require('./crawl')
+const API_KEY = process.env.API_KEY
+
 //http://www.omdbapi.com/?t=fast+and+furious&plot=full
-var date = Date.now()
+const date = Date.now()
 Imdb = {
   rootUrl : "https://api.themoviedb.org/3/",
   imgRootUrl : "https://image.tmdb.org/t/p/",
-  apiKey : "api_key=18a56dee58d57bd2a91d7909b636f836",
+  apiKey : `api_key=${API_KEY}`,
   en : "&language=en",
   discoverMovie : "discover/movie?",
   discoverTv : "discover/tv?",
@@ -51,33 +53,33 @@ People - movie_credits, tv_credits, combined_credits, images, external_ids, tagg
 */
 //tv details
 
-//popular paople ------------  https://api.themoviedb.org/3/person/popular?api_key=18a56dee58d57bd2a91d7909b636f836&language=en-US&page=1
+//popular paople ------------  https://api.themoviedb.org/3/person/popular?api_key=API_KEY&language=en-US&page=1
 
 //person images ----- /person/{person_id}/images
 
 //person combined credits ----- /person/{person_id}/combined_credits
 
-//Get movies by genre ---------  https://api.themoviedb.org/3/genre/{genre_id}/movies?api_key=18a56dee58d57bd2a91d7909b636f836&language=en-US&include_adult=false&sort_by=created_at.asc
+//Get movies by genre ---------  https://api.themoviedb.org/3/genre/{genre_id}/movies?api_key=API_KEY&language=en-US&include_adult=false&sort_by=created_at.asc
 
-//Get movies that came out today and lower ordering by date ---------- https://api.themoviedb.org/3/discover/movie?api_key=18a56dee58d57bd2a91d7909b636f836&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&release_date.lte=2017-06-09T20%3A28%3A05.681Z
+//Get movies that came out today and lower ordering by date ---------- https://api.themoviedb.org/3/discover/movie?api_key=API_KEY&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&release_date.lte=2017-06-09T20%3A28%3A05.681Z
 
-//Highest Revenue movies ------------- https://api.themoviedb.org/3/discover/movie?api_key=18a56dee58d57bd2a91d7909b636f836&language=en-US&sort_by=revenue.desc&include_adult=false&include_video=false&page=1
+//Highest Revenue movies ------------- https://api.themoviedb.org/3/discover/movie?api_key=API_KEY&language=en-US&sort_by=revenue.desc&include_adult=false&include_video=false&page=1
 
-//multi search  :  https://api.themoviedb.org/3/search/multi?api_key=18a56dee58d57bd2a91d7909b636f836&language=en-US&query=stallon&page=1&include_adult=false       
-//https://api.themoviedb.org/3/discover/movie?api_key=18a56dee58d57bd2a91d7909b636f836&language=en-US&sort_by=popularity.desc
+//multi search  :  https://api.themoviedb.org/3/search/multi?api_key=API_KEY&language=en-US&query=stallon&page=1&include_adult=false       
+//https://api.themoviedb.org/3/discover/movie?api_key=API_KEY&language=en-US&sort_by=popularity.desc
 
 getOzoneMovies = function() {
-  var url = "http://ozonecinemas.com/now_showing.php";
+  const url = "http://ozonecinemas.com/now_showing.php";
   request(url, function (error, response, body) {
     if (!error) {
-      var $ = cheerio.load(body, {normalizeWhitespace: true})
-      var title = $('header div div.col.span_1_of_2 font').text();
-      var nowShowings = $('header div ul li div.clearfix > b > font')
-      var stories = $('header div ul li .post_text p')
-      var showTimes = $('header div ul li .post_text')
-      var trailerUrls = $("body > header > div.menu_wrap > div > div > div.content > div > div > div.col-lg-8.col-md-8.col-sm-12 > div.section.read_post_list > ul > li > div.col-lg-5.col-md-6.col-sm-6 > div > div.iframe_video_container > iframe")
+      const $ = cheerio.load(body, {normalizeWhitespace: true})
+      const title = $('header div div.col.span_1_of_2 font').text();
+      const nowShowings = $('header div ul li div.clearfix > b > font')
+      const stories = $('header div ul li .post_text p')
+      const showTimes = $('header div ul li .post_text')
+      const trailerUrls = $("body > header > div.menu_wrap > div > div > div.content > div > div > div.col-lg-8.col-md-8.col-sm-12 > div.section.read_post_list > ul > li > div.col-lg-5.col-md-6.col-sm-6 > div > div.iframe_video_container > iframe")
       console.log(title)
-      var result=[]
+      const result=[]
       for (let x in nowShowings) {
         if (x < nowShowings.length)
         // console.log(nowShowings.eq(x).text()+ ' || SHOW TIMES '+showTimes.eq(x).text().match(/\d{1,2}:\d{2}(AM|PM)/g)+'>>|| \n \n'+ trailerUrl.eq(x).attr("src"))
