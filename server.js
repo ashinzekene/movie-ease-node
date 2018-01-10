@@ -20,10 +20,11 @@ const port = process.env.PORT || 4400
 app.use(cors({ origin: "https://ashinzekene.github.io" }))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", [ "https://ashinzekene.github.io"])
-//   next()
-// })
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", [ "https://ashinzekene.github.io"])
+  res.setHeader("Access-Control-Allow-Credentials", "true")
+  next()
+})
 
 app.use('/movies', moviesRoute)
 app.use('/actors', actorsRoute)
