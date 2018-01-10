@@ -14,7 +14,7 @@ var seriesRoute = require('./routes/new-series')
 var imagesRoute = require('./routes/images-route')
 var botRoute = require('./routes/bot-route')
 var appendResponseRoute = require('./routes/append-response-route')
-var port = 4400
+var port = process.env.PORT || 4400
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
