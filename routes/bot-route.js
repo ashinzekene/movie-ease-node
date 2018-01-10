@@ -1,37 +1,3 @@
-// var express = require('express')
-// var route = express.Router()
-// var io= require('socket.io')(route)
-
-// var movies = require("../functions/movies")
-// var rq = require('request-promise')
-// var actors = require("../functions/actors")
-// var series = require("../functions/series")
-// var apiai = require('apiai')
-// var sessionId = Math.random() * 10000000
-// var clientAccessToken =process.env.CLIENT_ACCESS_TOKEN
-// var developerAccessToken = process.env.DEVELOPER_ACCESS_TOKEN
-// var app = apiai(clientAccessToken)
-
-// io.on('connection', function(client) {  
-//   console.log('Client connected...');
-//     var request
-//     client.on('userMessage', data => {
-//       console.log(data, "GOTTEN")
-//       request = app.textRequest(data, { sessionId });
-//     })
-    
-//     request.on('response', response => {
-//       console.log(response, "RECIEVED")
-//       client.emit('AIMessage', response)
-//     });
-    
-//     request.on('error', function(error) {
-//       console.log("ERROR", error);
-//     });
-    
-//     request.end();
-// })
-
 // route.post("/", (req, res) => {
 //   res.setHeader("Content-Type","application/json")
 //   const { parameters, action } = req.body.result

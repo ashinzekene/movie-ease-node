@@ -18,6 +18,10 @@ var port = 4400
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", [ "https://ashinzekene.github.io"])
+  next()
+})
 
 app.use('/movies', moviesRoute)
 app.use('/actors', actorsRoute)

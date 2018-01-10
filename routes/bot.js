@@ -7,21 +7,13 @@ const AI = apiai(process.env.CLIENT_ACCESS_TOKEN);
 const sessionId = "1000789980"
 const app = express.Router()
 let io = require('socket.io')();
-// const server = http.createServer(app)
 
+// io.use(function(socket, next) {
+//   var token = socket.response.setHeader("Access-Control-Allow-Origin", ["http://localhost:3000"])
+//   next();
+// });
 
-// server.listen(80)
-// const PORT = process.env.PORT || 3999
-
-// app.use(express.static(path.join(__dirname, 'client/build')));
-// app.use((req, res) => {
-//   console.log(req.ip)
-//   res.sendFile(`${__dirname}/client/build/index.html`)
-// })
-
-// app.listen(PORT, (err) => {
-//   console.log("Listeneing on ", PORT)
-// })
+// io.origins(['http://localhost:3000'])
 
 io.on("connection", client => {
   console.log("Client connected")
@@ -47,4 +39,5 @@ io.on("connection", client => {
     apiaiReq.end()
   })
 })
+// io.
 io.listen(8000)
