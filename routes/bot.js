@@ -8,12 +8,12 @@ const sessionId = "1000789980"
 const app = express.Router()
 let io = require('socket.io')();
 
-// io.use(function(socket, next) {
-//   var token = socket.response.setHeader("Access-Control-Allow-Origin", ["http://localhost:3000"])
-//   next();
-// });
+io.use(function(socket, next) {
+  var token = socket.response.setHeader("Access-Control-Allow-Origin", ["http://localhost:3000"])
+  next();
+});
 
-// io.origins(['http://localhost:3000'])
+io.origins(['http://localhost:3000'])
 
 io.on("connection", client => {
   console.log("Client connected")
