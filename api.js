@@ -43,31 +43,6 @@ module.exports = {
   genesisCinemasLagos: crawl.genesisCinemasLagos()
 }
 
-/*
-APPEND TO RESPONSE
-Movies - account_states, credits, alternative_titles, recommendations, images, videos, reviews, release_dates, similar, external_ids
-
-Series - account_states, credits, alternative_titles, content_ratings, external_ids, recommendations, translation, similar, videos, images
-
-People - movie_credits, tv_credits, combined_credits, images, external_ids, tagged_images
-*/
-//tv details
-
-//popular paople ------------  https://api.themoviedb.org/3/person/popular?api_key=API_KEY&language=en-US&page=1
-
-//person images ----- /person/{person_id}/images
-
-//person combined credits ----- /person/{person_id}/combined_credits
-
-//Get movies by genre ---------  https://api.themoviedb.org/3/genre/{genre_id}/movies?api_key=API_KEY&language=en-US&include_adult=false&sort_by=created_at.asc
-
-//Get movies that came out today and lower ordering by date ---------- https://api.themoviedb.org/3/discover/movie?api_key=API_KEY&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&release_date.lte=2017-06-09T20%3A28%3A05.681Z
-
-//Highest Revenue movies ------------- https://api.themoviedb.org/3/discover/movie?api_key=API_KEY&language=en-US&sort_by=revenue.desc&include_adult=false&include_video=false&page=1
-
-//multi search  :  https://api.themoviedb.org/3/search/multi?api_key=API_KEY&language=en-US&query=stallon&page=1&include_adult=false       
-//https://api.themoviedb.org/3/discover/movie?api_key=API_KEY&language=en-US&sort_by=popularity.desc
-
 getOzoneMovies = function() {
   const url = "http://ozonecinemas.com/now_showing.php";
   request(url, function (error, response, body) {
@@ -78,7 +53,7 @@ getOzoneMovies = function() {
       const stories = $('header div ul li .post_text p')
       const showTimes = $('header div ul li .post_text')
       const trailerUrls = $("body > header > div.menu_wrap > div > div > div.content > div > div > div.col-lg-8.col-md-8.col-sm-12 > div.section.read_post_list > ul > li > div.col-lg-5.col-md-6.col-sm-6 > div > div.iframe_video_container > iframe")
-      console.log(title)
+      // console.log(title)
       const result=[]
       for (let x in nowShowings) {
         if (x < nowShowings.length)
@@ -90,8 +65,34 @@ getOzoneMovies = function() {
           trailerUrl: trailerUrls.eq(x).attr("src")
         })
       }
-      // console.log(result)
       return result
     }
   })
 }
+
+/*
+APPEND TO RESPONSE
+Movies - account_states, credits, alternative_titles, recommendations, images, videos, reviews, release_dates, similar, external_ids
+
+Series - account_states, credits, alternative_titles, content_ratings, external_ids, recommendations, translation, similar, videos, images
+
+People - movie_credits, tv_credits, combined_credits, images, external_ids, tagged_images
+
+tv details
+
+popular paople ------------  https://api.themoviedb.org/3/person/popular?api_key=API_KEY&language=en-US&page=1
+
+person images ----- /person/{person_id}/images
+
+person combined credits ----- /person/{person_id}/combined_credits
+
+Get movies by genre ---------  https://api.themoviedb.org/3/genre/{genre_id}/movies?api_key=API_KEY&language=en-US&include_adult=false&sort_by=created_at.asc
+
+Get movies that came out today and lower ordering by date ---------- https://api.themoviedb.org/3/discover/movie?api_key=API_KEY&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&release_date.lte=2017-06-09T20%3A28%3A05.681Z
+
+Highest Revenue movies ------------- https://api.themoviedb.org/3/discover/movie?api_key=API_KEY&language=en-US&sort_by=revenue.desc&include_adult=false&include_video=false&page=1
+
+multi search  :  https://api.themoviedb.org/3/search/multi?api_key=API_KEY&language=en-US&query=stallon&page=1&include_adult=false       
+https://api.themoviedb.org/3/discover/movie?api_key=API_KEY&language=en-US&sort_by=popularity.desc
+
+*/

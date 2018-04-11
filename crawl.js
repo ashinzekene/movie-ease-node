@@ -106,12 +106,12 @@ module.exports = {
   genesisCinemasLagos
 }
 
-filmhouseSurulere().then(res => {
-  fs.writeFile("results", JSON.stringify(res), (err, res) => {
-    if (err) console.log(err)
-    console.log("Done")
-  })
-}) 
+// filmhouseSurulere().then(res => {
+//   fs.writeFile("results", JSON.stringify(res), (err, res) => {
+//     if (err) console.log(err)
+//     console.log("Done")
+//   })
+// }) 
 
 // movie.find("br").nextAll(".movie__option").text().match(/^/)
 
