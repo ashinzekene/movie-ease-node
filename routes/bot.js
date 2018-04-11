@@ -2,12 +2,13 @@ const http = require("http")
 const apiai = require('apiai');
 const path = require("path")
 const excuse = require("huh")
-const server = require("../server")
 const express = require("express")
 const AI = apiai(process.env.CLIENT_ACCESS_TOKEN);
 const sessionId = "1000789980"
 const app = express.Router()
-let io = require('socket.io')(server);
+let io = require('socket.io')(require("../server"));
+
+console.log("How far")
 
 io.use(function(socket, next) {
   var token = socket.response.setHeader("Access-Control-Allow-Origin", ["http://localhost:3000"])
