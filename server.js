@@ -16,11 +16,11 @@ const botRoute = require('./routes/bot-route')
 const appendResponseRoute = require('./routes/append-response-route')
 const port = process.env.PORT || 5400
 
-// app.use(cors({ origin: ["http://localhost:3000"], credentials: ["http://localhost:3000"] }))
+// app.use(cors({ origin: ["https://http://ashinzekene.github.io/movie-ease-bot"], credentials: ["https://http://ashinzekene.github.io/movie-ease-bot"] }))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", [ "http://localhost:3000"])
+  res.setHeader("Access-Control-Allow-Origin", [ "https://http://ashinzekene.github.io/movie-ease-bot"])
   res.setHeader("Access-Control-Allow-Credentials", "true")
   next()
 })

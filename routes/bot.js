@@ -11,11 +11,11 @@ let io = require('socket.io')(require("../server"));
 console.log("How far")
 
 io.use(function(socket, next) {
-  var token = socket.response.setHeader("Access-Control-Allow-Origin", ["http://localhost:3000"])
+  var token = socket.response.setHeader("Access-Control-Allow-Origin", ["https://http://ashinzekene.github.io/movie-ease-bot"])
   next();
 });
 
-io.origins(['http://localhost:3000'])
+io.origins(['https://http://ashinzekene.github.io/movie-ease-bot'])
 
 io.on("connection", client => {
   console.log("Client connected")
