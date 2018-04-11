@@ -15,7 +15,7 @@ const seriesRoute = require('./routes/new-series')
 const imagesRoute = require('./routes/images-route')
 const botRoute = require('./routes/bot-route')
 const appendResponseRoute = require('./routes/append-response-route')
-const port = process.env.PORT || 5400
+const port = 5400
 
 app.use(cors({ origin: "https://ashinzekene.github.io" }))
 app.use(bodyParser.urlencoded({extended: false}))
