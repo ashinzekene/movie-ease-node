@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
   res.status(200).json({ result: 'You requested for movies' });
 });
 router.get('/one/:id', function(req, res, next) {
-  if (req.params.short === 'yes') {
+  if (req.query.short === 'yes') {
     movies.oneShort(req.params.id).then(result => res.status(200).json(result));
     return;
   }
