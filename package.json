@@ -19,7 +19,7 @@
     "express": "^4.15.5",
     "express-static": "^1.2.4",
     "huh": "^2.0.1",
-    "request": "^2.83.0",
+    "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "socket.io": "^2.0.3"
   }
